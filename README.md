@@ -1,5 +1,7 @@
 # SecureFileGuard – Automated File Protection & Secure Transfer (C++, Win32, Winsock2)
 
+[![Build Solution](https://github.com/Strahinja147/Secure-File-Exchange/actions/workflows/ci.yml/badge.svg)](https://github.com/Strahinja147/Secure-File-Exchange/actions/workflows/ci.yml)
+
 ## Overview
 
 Modular C++ security suite developed as a **university project** for real-time file system monitoring, multi-algorithm encryption, and secure peer-to-peer distribution on Windows.  
