@@ -12,7 +12,9 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
 
+      # OVO JE NOVI KORAK KOJI TI FALI
+      - name: Restore NuGet Packages
+        run: nuget restore ZastitaInformacija.sln
+
       - name: Build Solution
-        # /p:Configuration=Release - kompajlira u Release modu
-        # /p:AdditionalIncludeDirectories=include - kaže mu da traži .h fajlove u tvom 'include' folderu
         run: msbuild ZastitaInformacija.sln /p:Configuration=Release /p:AdditionalIncludeDirectories=include
