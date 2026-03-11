@@ -1,4 +1,4 @@
-# SecureFileGuard – Automated File Protection & Secure Transfer (C++, Win32, Winsock2)
+# SecureFileExchange – Automated File Protection & Secure Transfer (C++, Win32, Winsock2)
 
 [![Build Solution](https://github.com/Strahinja147/Secure-File-Exchange/actions/workflows/ci.yml/badge.svg)](https://github.com/Strahinja147/Secure-File-Exchange/actions/workflows/ci.yml)
 
