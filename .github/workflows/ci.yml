@@ -12,7 +12,6 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
 
-      # OVO JE NOVI KORAK KOJI TI FALI
       - name: Restore NuGet Packages
         run: nuget restore ZastitaInformacija.sln
 
