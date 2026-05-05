@@ -14,9 +14,10 @@
 #include "Logger.h"
 #include "FileManager.h"
 #include "A52.h"
-using namespace std;
-//namespace fs = std::filesystem;
+#include "Benchmark.h" 
 
+using namespace std;
+namespace fs = std::filesystem;
 
 void PrikaziMeni(int trenutniAlgoritam) {
     cout << "\n--- MENI (Indeks 19089) ---\n";
@@ -34,11 +35,19 @@ void PrikaziMeni(int trenutniAlgoritam) {
     cout << "6. Pokreni Server (Automatski prijem i dekripcija)\n";
     cout << "7. Posalji fajl preko mreze\n";
     cout << "8. Promeni lozinku sesije\n";
+    cout << "9. POKRENI BENCHMARK TESTOVE (Performance)\n"; 
     cout << "0. Izlaz\n";
     cout << "Izbor: ";
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+
+    if (argc > 1 && string(argv[1]) == "--benchmark") {
+        cout << "CI/CD Mode: Pokrecem automatizovani benchmark..." << endl;
+        Benchmark::RunAll("ci_test_password_123");
+        return 0; 
+    }
+
     string targetFolder = "Target";
     string outputFolder = "Zasticeni";
     string downloadsFolder = "Downloads";
@@ -56,7 +65,7 @@ int main() {
     cout << "Unesite lozinku sesije: ";
     getline(cin, globalnaLozinka);
 
-    int trenutniAlgoritam = 2; 
+    int trenutniAlgoritam = 2;
     bool fswAktivan = false;
     bool serverAktivan = false;
     int izbor = -1;
@@ -75,24 +84,24 @@ int main() {
             cin.ignore(10000, '\n');
             continue;
         }
-        cin.ignore(); 
+        cin.ignore();
 
         switch (izbor) {
-        case 1: 
+        case 1:
             if (!fswAktivan) {
                 fsw.start(targetFolder, trenutniAlgoritam, globalnaLozinka);
                 fswAktivan = true;
             }
             break;
 
-        case 2: 
+        case 2:
             if (fswAktivan) {
                 fsw.stop();
                 fswAktivan = false;
             }
             break;
 
-        case 3: 
+        case 3:
             cout << "Unesite (1: SS, 2: A5/2 CTR, 3: A5/2 Std): ";
             int noviAlg;
             if (cin >> noviAlg && noviAlg >= 1 && noviAlg <= 3) {
@@ -105,7 +114,7 @@ int main() {
             }
             break;
 
-        case 4: 
+        case 4:
         {
             cout << "Putanja do fajla za enkripciju: ";
             string p; getline(cin, p);
@@ -118,7 +127,7 @@ int main() {
             break;
         }
 
-        case 5: 
+        case 5:
         {
             cout << "Putanja do .bin fajla: ";
             string p; getline(cin, p);
@@ -131,7 +140,7 @@ int main() {
             break;
         }
 
-        case 6: 
+        case 6:
         {
             int port;
             cout << "Unesite port za server: "; cin >> port;
@@ -140,7 +149,7 @@ int main() {
             break;
         }
 
-        case 7: 
+        case 7:
         {
             string ip, fajl; int port;
             cout << "IP adresa primaoca: "; cin >> ip;
@@ -151,7 +160,7 @@ int main() {
             break;
         }
 
-        case 8: 
+        case 8:
         {
             cout << "Unesite novu globalnu lozinku: ";
             getline(cin, globalnaLozinka);
@@ -164,6 +173,10 @@ int main() {
             }
             break;
         }
+
+        case 9: 
+            Benchmark::RunAll(globalnaLozinka.empty() ? "test_lozinka" : globalnaLozinka);
+            break;
 
         case 0:
             fsw.stop();

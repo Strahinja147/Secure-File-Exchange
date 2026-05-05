@@ -1,10 +1,11 @@
-name: Build Solution
+name: Build and Benchmark
 
 on: [push, pull_request]
 
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -15,5 +16,11 @@ jobs:
       - name: Restore NuGet Packages
         run: nuget restore ZastitaInformacija.sln
 
-      - name: Build Solution
+      - name: Build Solution (Release)
         run: msbuild ZastitaInformacija.sln /p:Configuration=Release /p:AdditionalIncludeDirectories=include
+
+      - name: Run Performance Benchmark
+        shell: cmd
+        run: |
+          echo --- RUNNING AUTOMATED PERFORMANCE TESTS ---
+          .\x64\Release\ZastitaInformacija.exe --benchmark

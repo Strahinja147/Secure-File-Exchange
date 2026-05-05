@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\A52.h" />
+    <ClInclude Include="include\Benchmark.h" />
     <ClInclude Include="include\FileManager.h" />
     <ClInclude Include="include\FSWatcher.h" />
     <ClInclude Include="include\KeyHelper.h" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\A52.cpp" />
+    <ClCompile Include="src\Benchmark.cpp" />
     <ClCompile Include="src\FileManager.cpp" />
     <ClCompile Include="src\FSWatcher.cpp" />
     <ClCompile Include="src\Logger.cpp" />
